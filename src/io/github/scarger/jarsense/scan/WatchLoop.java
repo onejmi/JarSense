@@ -36,14 +36,13 @@ public class WatchLoop implements Runnable {
                 //get the new file, knowing this type event involves path
                 WatchEvent<Path> currEvent = (WatchEvent<Path>) watchEvent;
                 Path child = path.resolve(currEvent.context());
+                
                 //check if it's a plugine (.jar, duhhhh... i thinnk -.-)
                 if(child.toString().endsWith(".jar")){
                     plugin.changeFound();
                     Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
                             plugin.getConfig().getString("refreshCommand"));
-                }
-
-
+                }   
             }
         }
     }
@@ -51,7 +50,7 @@ public class WatchLoop implements Runnable {
     @Override
     public void run() {
         WatchKey key;
-
+        
         try (WatchService service = path.getFileSystem().newWatchService()) {
             //register the path for a certain event so the watcher will watch for it
             path.register(service, ENTRY_CREATE, ENTRY_MODIFY);
