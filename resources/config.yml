@@ -1,0 +1,2 @@
+refreshCommand: 'restart'
+pluginsDir: 'plugins\' #windows :P, unix would be 'plugins/'
